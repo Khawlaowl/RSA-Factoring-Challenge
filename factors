@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+check_factor() {
+    num=$1
+    factors=($(factor "$num"))
+
+    if [ ${#factors[@]} -eq 2 ]; then
+        echo "$num=${factors[0]}*${factors[1]}"
+    else
+        echo "Error: Factorization failed for $num"
+    fi
+}
+
+if [ $# -ne 1 ]; then
+    echo 'Usage: factors <file>'
+    exit 1
+else
+    while read -r number; do
+        check_factor "$number"
+    done < "$1"
+fi
