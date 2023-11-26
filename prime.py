@@ -57,22 +57,9 @@ def factor(n, lp):
         if n % i == 0:
             return i
 
- # Pollard's rho algorithm
-    def rho_factorization(n):
-        if n % 2 == 0:
-            return 2
 
-        x, y, d = 2, 2, 1
-        f = lambda x: (x**2 + 1) % n
 
-        while d == 1:
-            x = f(x)
-            y = f(f(y))
-            d = gcd(abs(x - y), n)
-
-        return d
-
-    return rho_factorization(n)
+    return rho_factorization(n):
 
     #lpi = [i for i in range (100001, int(n ** .5)+1) if i % 2 != 0 and i % 3 != 0 and i % 5 != 0]
     """for i in range (100000001, int(n ** .5)+1,2):
@@ -106,18 +93,25 @@ def factor(n, lp):
             if n % (6*i-1) == 0:
                 return 6*i-1
     """    
-    return 1
-def primef(n):
-    if n <= 3:
-        return int(n)
-    if n % 2 == 0:
-        return 2
-    elif n % 3 == 0:
-        return 3
-    else:
-        for i in range(5, int((n)**0.5) + 1, 6):
+
+        if n % 2 == 0:
+            return 2
+
+        x, y, d = 2, 2, 1
+        f = lambda x: (x**2 + 1) % n
+
+        while d == 1:
+            x = f(x)
+            y = f(f(y))
+            d = gcd(abs(x - y), n)
+
+        return d
+
+    # Try Pollard's rho factorization followed by trial division
+    result = rho_factorization(n)
+    if result == 1:
+        for i in range(2, int(n**0.5) + 1):
             if n % i == 0:
-                return int(i)
-            if n % (i + 2) == 0:
-                return primef(n/(i+2))
-    return int(n)
+                return i
+
+    return result
