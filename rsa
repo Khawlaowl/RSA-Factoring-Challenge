@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import sys
 from prime import factor, primef, gen_primes
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         exit(1)
@@ -9,7 +8,7 @@ if __name__ == "__main__":
     lp = []
     with open("prime.txt", 'r') as file:
             for line in file:
-                lp=line[:-1].split(",")
+                lp = line[:-1].split(",")
                 break
     lp = list(map(int, lp))
 
@@ -20,4 +19,4 @@ if __name__ == "__main__":
 
     for i in lpi:
         j = factor(i, lp)
-        print("{}={}*{}".format(i,i//j,j))
+        print("{}={:d}*{:d}".format(i, i // j, j))
