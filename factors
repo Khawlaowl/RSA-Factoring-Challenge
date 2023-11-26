@@ -8,6 +8,6 @@ if __name__ == "__main__":
 
     with open(sys.argv[1], 'r') as file:
         for line in file:
-            i = int(line)
+            i = int(line.strip())
             j = factors(i)
-             print(f"{i}={i//j}*{j}")
+            print(f"{i}={i//j}*{j}")
