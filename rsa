@@ -1,36 +1,22 @@
-#!/usr/bin/python3
-"""
-Factorize as many numbers as possible into a product of two smaller numbers.
+#!/bin/bash
 
-"""
-# library to get arguments
-import sys
+# Usage function
+usage() {
+	echo "Usage: $0 <file>"
+	echo "  <file>  File containing positive integers (one per line)"
+}
 
+# Check if file parameter is provided and exists
+if [ -z "$1" ] || [ ! -f "$1" ]; then
+	usage
+	exit 1
+fi
 
-# fn unpack number factorial
-def fc():
-    """
-    function fc to search file to convert number and format n=p*q
-    """
-    try:
-        revfile = sys.argv[1]
-        with open(revfile) as f:
-            for revnumber in f:
-                revnumber = int(revnumber)
-                if revnumber % 2 == 0:
-                        print("{}={}*{}".format(revnumber, revnumber // 2, 2))
-                        continue
-                i = 3
-                while i < revnumber // 2:
-                    if revnumber % i == 0:
-                        print("{}={}*{}".format(revnumber, revnumber // i, i))
-                        break
-                    i = i + 2
-                if i == (revnumber // 2) + 1:
-                    print("{}={}*{}".format(revnumber, revnumber, 1))
-    except (IndexError):
-        pass
-
-
-# autostart
-fc()
+# Read the file line by line
+filename="$1"
+while IFS= read -r number; do
+	result=$(factor "$number")
+	second_num=$(echo $result | tr ":" "=" | cut -d " " -f 2 | tr -d " ")
+	third_num=$(expr $number / $second_num)
+	echo "$number=$third_num*$second_num"
+done < "$filename"
