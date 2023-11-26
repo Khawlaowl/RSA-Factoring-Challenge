@@ -35,23 +35,29 @@ def gen_primes(n):
 
         q += 1
 
-def factor(n, lp):
-    if n in lp:
-        return 1
+def factors(n):
+    result = []
+    # Handle 2 separately to simplify the loop and reduce the number of odd checks
+    while n % 2 == 0:
+        result.append(2)
+        n //= 2
 
-    for j in lp:
-        if n % j == 0:
-            return j
+    # Use isqrt to find the square root of n (rounded down to the nearest integer)
+    limit = isqrt(n) + 1
 
-    # Trial division with primes up to sqrt(n)
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return i
+    # Iterate only over odd numbers starting from 3
+    for i in range(3, limit, 2):
+        while n % i == 0:
+            result.append(i)
+            n //= i
 
+    # Handle the case when n is a prime greater than 2
+    if n > 2:
+        result.append(n)
+
+    return result
     # Additional factorization methods if needed
     # ...
-
-    return 1
 
 def primef(n):
     if n <= 3:
