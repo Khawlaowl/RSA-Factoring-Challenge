@@ -50,9 +50,17 @@ def gen_primes(n):
 def factor(n, lp):
     if n in lp:
         return 1
+    
     for j in lp:
         if n % j == 0:
             return j
+
+    for i in gen_primes(n):
+        if n % i == 0:
+            return i
+
+    return 1
+
     #lpi = [i for i in range (100001, int(n ** .5)+1) if i % 2 != 0 and i % 3 != 0 and i % 5 != 0]
     """for i in range (100000001, int(n ** .5)+1,2):
         if n % i == 0:
