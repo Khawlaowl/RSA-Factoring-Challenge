@@ -59,7 +59,7 @@ def factor(n, lp):
 
 
 
-    return rho_factorization(n):
+    def rho_factorization(n):
 
     #lpi = [i for i in range (100001, int(n ** .5)+1) if i % 2 != 0 and i % 3 != 0 and i % 5 != 0]
     """for i in range (100000001, int(n ** .5)+1,2):

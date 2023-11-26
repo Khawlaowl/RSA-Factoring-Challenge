@@ -8,4 +8,7 @@ if __name__ == "__main__":
         lpi = [int(line) for line in file]
     for i in lpi:
         j = factors(i)
+        if j == 1:
+            print("{} is prime".format(i))
+        else:
         print("{}={:d}*{}".format(i,i//j,j))
