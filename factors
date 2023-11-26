@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 import sys
 from primes import factors
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         exit(1)
+
     with open(sys.argv[1], 'r') as file:
-        lpi = [int(line) for line in file]
-    for i in lpi:
-        j = factors(i)
-        print("{}={:d}*{}".format(i,i//j,j))
+        for line in file:
+            i = int(line)
+            j = factors(i)
+            print("{}={:d}*{}".format(i, i // j, j))
