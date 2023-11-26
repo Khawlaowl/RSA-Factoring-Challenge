@@ -57,7 +57,22 @@ def factor(n, lp):
         if n % i == 0:
             return i
 
-    return n
+ # Pollard's rho algorithm
+    def rho_factorization(n):
+        if n % 2 == 0:
+            return 2
+
+        x, y, d = 2, 2, 1
+        f = lambda x: (x**2 + 1) % n
+
+        while d == 1:
+            x = f(x)
+            y = f(f(y))
+            d = gcd(abs(x - y), n)
+
+        return d
+
+    return rho_factorization(n)
 
     #lpi = [i for i in range (100001, int(n ** .5)+1) if i % 2 != 0 and i % 3 != 0 and i % 5 != 0]
     """for i in range (100000001, int(n ** .5)+1,2):
