@@ -33,10 +33,7 @@ def gen_primes(n):
     # The running integer that's checked for primeness
     q = 2
     
-    while q<n:
-        q = 2
-    
-    while True:
+    while q <= n:
         if q not in D:
             D[q * q] = [q]
             yield q
