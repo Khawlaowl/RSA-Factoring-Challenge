@@ -32,7 +32,8 @@ def gen_primes(n):
     
     # The running integer that's checked for primeness
     q = 2
-     while q <= n:
+    
+    while q<n:
         if q not in D:
             # q is a new prime.
             # Yield it and mark its first multiple that isn't
@@ -40,7 +41,6 @@ def gen_primes(n):
             # 
             #yield q
             D[q * q] = [q]
-            yield q
         else:
             # q is composite. D[q] is the list of primes that
             # divide it. Since we've reached q, we no longer
@@ -54,9 +54,10 @@ def gen_primes(n):
         if n % int(q) == 0:
             yield q
             break
-
+        
+        
         q += 1
-    
+
 
 
 def factor(n, lp):
@@ -112,25 +113,3 @@ def primef(n):
             if n % (i + 2) == 0:
                 return primef(n/(i+2))
     return int(n)
-def factors(n):
-    result = []
-    # Handle 2 separately to simplify the loop and reduce the number of odd checks
-    while n % 2 == 0:
-        result.append(2)
-        n //= 2
-
-    # Use isqrt to find the square root of n (rounded down to the nearest integer)
-    limit = isqrt(n) + 1
-
-    # Iterate only over odd numbers starting from 3
-    for i in range(3, limit, 2):
-        while n % i == 0:
-            result.append(i)
-            n //= i
-
-    # Handle the case when n is a prime greater than 2
-    if n > 2:
-        result.append(n)
-
-    return result
-    # Additional factorization methods if needed
