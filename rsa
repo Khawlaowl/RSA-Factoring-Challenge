@@ -1,18 +1,23 @@
 #!/usr/bin/python3
-from sys import argv
+import sys
+from prime import factor, primef, gen_primes
 
-with open(argv[1]) as f:
-    for line in f:
-        num = int(line)
-        print("{:d}=".format(num), end="")
-        if num % 2 == 0:
-            print("{}*2".format(num//2))
-            continue
-        for i in range(3, num, 2):
-            if num % i == 0:
-                factor = num//i
-                for j in range(3, factor, 2):
-                    if factor % j == 0 or i % j == 0:
-                        break
-                print("{}*{}".format(factor, i))
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        exit(1)
+
+    lp = []
+    with open("prime.txt", 'r') as file:
+            for line in file:
+                lp=line[:-1].split(",")
                 break
+    lp = list(map(int, lp))
+
+    lpi = []
+    with open(sys.argv[1], 'r') as file:
+        lpi = file.readlines()
+        lpi = [int(num) for num in lpi]
+
+    for i in lpi:
+        j = factor(i, lp)
+        print("{}={}*{}".format(i,i//j,j))
