@@ -10,4 +10,4 @@ if __name__ == "__main__":
         for line in file:
             i = int(line)
             j = factors(i)
-            print("{}={:d}*{}".format(i, i // j, j))
+             print(f"{i}={i//j}*{j}")
